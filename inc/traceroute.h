@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:11:50 by eric              #+#    #+#             */
-/*   Updated: 2026/03/04 14:55:10 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/04 16:26:28 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_traceroute
 	
 } t_traceroute;
 
-
 /*UTILS*/
 void	*ft_memset(void *ptr, int value, size_t len);
 
@@ -54,5 +53,9 @@ void	init_traceroute(t_traceroute *trace);
 int		create_recv_socket(void); 								// -> socket RAW ICMP pour recevoir
 int		create_send_socket(void); 								// -> socket UDP pour envoyer
 int		resolve_host(t_traceroute* trace, char *hostname);		// -> resout le hostname en IP
+
+/*TRACEROUTE*/
+void	send_probe(t_traceroute *trace);
+
 
 #endif
