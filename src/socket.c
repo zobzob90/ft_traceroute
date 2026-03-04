@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 15:46:02 by eric              #+#    #+#             */
-/*   Updated: 2026/03/04 13:52:48 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/04 14:49:18 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	create_send_socket(void)
 	if (sockfd < 0)
 	{
 		fprintf(stderr, "socket send: %s\n", strerror(errno));
+		return (-1);
 	}
-	return (sockfd)
+	return (sockfd);
 }

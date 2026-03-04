@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:11:50 by eric              #+#    #+#             */
-/*   Updated: 2026/03/04 13:54:00 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/04 14:55:10 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <netdb.h>
 
 #include <sys/socket.h>
 #include <sys/time.h>
@@ -25,7 +26,9 @@
 
 typedef struct s_traceroute
 {
-	int						sockfd;
+	int						send_fd;
+	int						recv_fd;
+	
 	struct	sockaddr_in		dest;
 	
 	int						ttl;
@@ -48,7 +51,8 @@ void	*ft_memset(void *ptr, int value, size_t len);
 void	init_traceroute(t_traceroute *trace);
 
 /*SOCKET*/
-int		create_recv_socket(void);
-int		create_send_socket(void);
+int		create_recv_socket(void); 								// -> socket RAW ICMP pour recevoir
+int		create_send_socket(void); 								// -> socket UDP pour envoyer
+int		resolve_host(t_traceroute* trace, char *hostname);		// -> resout le hostname en IP
 
 #endif
