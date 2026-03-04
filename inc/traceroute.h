@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:11:50 by eric              #+#    #+#             */
-/*   Updated: 2026/03/03 16:38:11 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/04 13:54:00 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #include <sys/socket.h>
 #include <sys/time.h>
@@ -38,5 +39,16 @@ typedef struct s_traceroute
 	struct timeval			end;
 	
 } t_traceroute;
+
+
+/*UTILS*/
+void	*ft_memset(void *ptr, int value, size_t len);
+
+/*INIT*/
+void	init_traceroute(t_traceroute *trace);
+
+/*SOCKET*/
+int		create_recv_socket(void);
+int		create_send_socket(void);
 
 #endif
