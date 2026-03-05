@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 15:46:02 by eric              #+#    #+#             */
-/*   Updated: 2026/03/04 16:21:37 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/05 10:09:01 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	resolve_host(t_traceroute* trace, char *hostname)
 	ret = getaddrinfo(hostname, NULL, &hints, &res);
 	if (ret != 0)
 	{
-		fprint(stderr, "getaddrinfo: %s", gai_strerror(ret));
+		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(ret));
 		return (-1);
 	}
 	trace->dest = *(struct sockaddr_in *)res->ai_addr;

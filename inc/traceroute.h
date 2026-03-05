@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:11:50 by eric              #+#    #+#             */
-/*   Updated: 2026/03/05 09:59:11 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/05 10:16:11 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 #include <netdb.h>
 
 #include <sys/socket.h>
+#include <sys/select.h>
 #include <sys/time.h>
 #include <netinet/ip.h>
+#include <netinet/ip_icmp.h>
 #include <arpa/inet.h>
 
 typedef struct s_traceroute
@@ -61,7 +64,7 @@ int		parse_icmp(char *buf);																// -> parsing icmp, lit le buffer et 
 /*TRACEROUTE*/
 void	send_probe(t_traceroute *trace);
 int		wait_response(t_traceroute *trace, struct sockaddr_in *recv_addr, char *buf);
-void	print_hop(int ttl, struct sockaddr_in *recv_addr, t_traceroute *trace);
+void	print_hop(struct sockaddr_in *recv_addr, t_traceroute *trace);
 void	print_timeout(void);
 void	run_traceroute(t_traceroute *trace);
 

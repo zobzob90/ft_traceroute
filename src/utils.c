@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 15:46:10 by eric              #+#    #+#             */
-/*   Updated: 2026/03/05 09:46:32 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/05 10:12:18 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	*ft_memset(void *ptr, int value, size_t len)
 
 double	calc_rtt(t_traceroute *trace)
 {
-	return ((trace->end.tv_sec - trace->start.tv_sec) * 1000.0 + (trace->end.tv_usec - trace->start.tv_sec) / 1000.0);
+	return ((trace->end.tv_sec - trace->start.tv_sec) * 1000.0 + (trace->end.tv_usec - trace->start.tv_usec) / 1000.0);
 }
