@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:11:50 by eric              #+#    #+#             */
-/*   Updated: 2026/03/04 16:26:28 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/05 09:59:11 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,24 @@ typedef struct s_traceroute
 
 /*UTILS*/
 void	*ft_memset(void *ptr, int value, size_t len);
+double	calc_rtt(t_traceroute *trace);
 
 /*INIT*/
-void	init_traceroute(t_traceroute *trace);
+void	init_traceroute(t_traceroute *trace);												// -> init structure
 
 /*SOCKET*/
-int		create_recv_socket(void); 								// -> socket RAW ICMP pour recevoir
-int		create_send_socket(void); 								// -> socket UDP pour envoyer
-int		resolve_host(t_traceroute* trace, char *hostname);		// -> resout le hostname en IP
+int		create_recv_socket(void); 															// -> socket RAW ICMP pour recevoir
+int		create_send_socket(void); 															// -> socket UDP pour envoyer
+int		resolve_host(t_traceroute* trace, char *hostname);									// -> resout le hostname en IP
+
+/*PARSING*/
+int		parse_icmp(char *buf);																// -> parsing icmp, lit le buffer et retourne le type
 
 /*TRACEROUTE*/
 void	send_probe(t_traceroute *trace);
-
+int		wait_response(t_traceroute *trace, struct sockaddr_in *recv_addr, char *buf);
+void	print_hop(int ttl, struct sockaddr_in *recv_addr, t_traceroute *trace);
+void	print_timeout(void);
+void	run_traceroute(t_traceroute *trace);
 
 #endif

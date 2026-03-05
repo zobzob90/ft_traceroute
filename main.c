@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 15:45:39 by eric              #+#    #+#             */
-/*   Updated: 2026/03/04 15:02:43 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/05 10:01:42 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(int ac, char *av[])
 {
-	if (ac < 1)
+	if (ac < 2)
 	{
 		printf("Wrong number of arguments");
 		return (-1);
@@ -28,9 +28,10 @@ int main(int ac, char *av[])
 	trace.send_fd = create_send_socket();
 	if (trace.send_fd < 0)
 		return (1);
-	while (1)
-	{
-
-	}
+	if (resolve_host(&trace, av[1]) < 0)
+		return (1);
+	run_traceroute(&trace);
+	close(trace.recv_fd);
+	close(trace.send_fd);
 	return (0);
 }
