@@ -3,6 +3,7 @@ NAME		= ft_traceroute
 CC		= gcc
 CFLAGS		= -Wall -Wextra -Werror
 INCLUDES	= -I inc/
+OBJ_DIR		= obj/
 
 SRCS		= main.c \
 		  src/init.c \
@@ -11,7 +12,7 @@ SRCS		= main.c \
 		  src/traceroute.c \
 		  src/utils.c
 
-OBJS		= $(SRCS:.c=.o)
+OBJS		= $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
 all: $(NAME)
 
@@ -19,11 +20,12 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "✅ $(NAME) compiled!"
 
-%.o: %.c
+$(OBJ_DIR)%.o: %.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 	@echo "🧹 Objects cleaned!"
 
 fclean: clean

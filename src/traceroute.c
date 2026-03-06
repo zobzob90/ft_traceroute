@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:09:51 by eric              #+#    #+#             */
-/*   Updated: 2026/03/05 10:19:45 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/06 10:17:33 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	wait_response(t_traceroute *trace, struct sockaddr_in *recv_addr, char *buf)
 
 	FD_ZERO(&fds);
 	FD_SET(trace->recv_fd, &fds);
-	timeout.tv_sec = 3;
+	timeout.tv_sec = trace->timeout;
 	timeout.tv_usec = 0;
 	if (select(trace->recv_fd + 1, &fds, NULL, NULL, &timeout) <= 0)
 		return (-1);
@@ -80,15 +80,14 @@ void	run_traceroute(t_traceroute *trace)
 				print_timeout();
 			else
 			{
-				// Affiche hostname + IP seulement si c'est un routeur différent
 				if (!first_printed || recv_addr.sin_addr.s_addr != first_addr.sin_addr.s_addr)
 				{
 					print_hop(&recv_addr, trace);
-					first_addr = recv_addr;
-					first_printed = 1;
 				}
 				else
-					printf("%.3f ms  ", calc_rtt(trace)); // même routeur → juste le RTT
+					printf("%.3f ms  ", calc_rtt(trace));
+				first_addr = recv_addr;
+				first_printed = 1;
 				if (ret == ICMP_UNREACH)
 					done = 1;
 			}

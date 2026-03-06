@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 15:45:56 by eric              #+#    #+#             */
-/*   Updated: 2026/03/05 09:23:18 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/06 10:47:41 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,38 @@ int	parse_icmp(char *buf)
 		return (ICMP_TIMXCEED);
 	if (icmp_hdr->icmp_type == ICMP_UNREACH)
 		return (ICMP_UNREACH);
+	return (-1);
+}
+
+int parse_args(int ac, char *av[], t_traceroute *trace)
+{
+	int	i;
+
+	i = 1;
+	while (i < ac)
+	{
+		if (strcmp(av[i], "--help") == 0)
+		{
+			print_usage(av[0]);
+			exit(0);
+		}	
+		else if (strcmp(av[i], "-m") == 0 && i + 1 < ac) // -> flag bonus nombre max de hops
+			trace->max_ttl = ft_atoi(av[++i]);
+		else if (strcmp(av[i], "-q") == 0 && i + 1 < ac) // -> flag bonus nombre de probes par hops
+			trace->probes_per_ttl = ft_atoi(av[++i]);
+		else if (strcmp(av[i], "-w") == 0 && i + 1 <  ac)
+			trace->timeout = ft_atoi(av[++i]);
+		else if (av[i][0] != '-')
+			return (i);
+		else
+		{
+			fprintf(stderr, "Unknow option: %s\n", av[i]);
+			print_usage(av[0]);
+			return (-1);
+		}
+		i++;
+	}
+	fprintf(stderr, "Missing hostname\n");
+	print_usage(av[0]);
 	return (-1);
 }
