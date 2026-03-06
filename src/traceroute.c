@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:09:51 by eric              #+#    #+#             */
-/*   Updated: 2026/03/06 10:17:33 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/06 12:35:37 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,13 @@ void	print_hop(struct sockaddr_in *recv_addr, t_traceroute *trace)
 	double	rtt;
 
 	rtt = calc_rtt(trace);
-	getnameinfo((struct sockaddr *)recv_addr, sizeof(*recv_addr), host, sizeof(host), NULL, 0, 0);
-	printf("%s (%s)  %.3f ms  ", host, inet_ntoa(recv_addr->sin_addr), rtt);
+	if (trace->no_dns)
+		printf("%s  %.3f ms  ", inet_ntoa(recv_addr->sin_addr), rtt);
+	else
+	{
+		getnameinfo((struct sockaddr *)recv_addr, sizeof(*recv_addr), host, sizeof(host), NULL, 0, 0);
+		printf("%s (%s)  %.3f ms  ", host, inet_ntoa(recv_addr->sin_addr), rtt);	
+	}
 }
 
 void	print_timeout(void)
@@ -81,9 +86,7 @@ void	run_traceroute(t_traceroute *trace)
 			else
 			{
 				if (!first_printed || recv_addr.sin_addr.s_addr != first_addr.sin_addr.s_addr)
-				{
 					print_hop(&recv_addr, trace);
-				}
 				else
 					printf("%.3f ms  ", calc_rtt(trace));
 				first_addr = recv_addr;

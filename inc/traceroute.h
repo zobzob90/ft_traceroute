@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:11:50 by eric              #+#    #+#             */
-/*   Updated: 2026/03/06 10:15:02 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/06 12:29:04 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_traceroute
 	int						sequence;
 	pid_t					pid;
 	int						timeout;
+	int						no_dns;
 	
 	struct timeval			start;
 	struct timeval			end;
@@ -54,16 +55,16 @@ double	calc_rtt(t_traceroute *trace);
 void	print_usage(char *str);
 
 /*INIT*/
-void	init_traceroute(t_traceroute *trace);												// -> init structure
+void	init_traceroute(t_traceroute *trace);												// -> init structure traceroute
 
 /*SOCKET*/
 int		create_recv_socket(void); 															// -> socket RAW ICMP pour recevoir
-int		create_send_socket(void); 															// -> socket UDP pour envoyer
+int		create_send_socket(void);													// -> socket UDP pour envoyer
 int		resolve_host(t_traceroute* trace, char *hostname);									// -> resout le hostname en IP
 
 /*PARSING*/
 int		parse_icmp(char *buf);																// -> parsing icmp, lit le buffer et retourne le type
-int 	parse_args(int ac, char *av[], t_traceroute *trace);
+int 	parse_args(int ac, char *av[], t_traceroute *trace);								// -> parsing des arguments
 
 /*TRACEROUTE*/
 void	send_probe(t_traceroute *trace);
