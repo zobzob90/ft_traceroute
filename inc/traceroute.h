@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:11:50 by eric              #+#    #+#             */
-/*   Updated: 2026/03/06 12:29:04 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/06 13:52:23 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_traceroute
 	pid_t					pid;
 	int						timeout;
 	int						no_dns;
+	int						port;
 	
 	struct timeval			start;
 	struct timeval			end;

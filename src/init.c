@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 15:45:54 by eric              #+#    #+#             */
-/*   Updated: 2026/03/06 12:17:45 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/06 13:53:25 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	init_traceroute(t_traceroute *trace)
 	trace->probes_per_ttl = 3;
 	trace->sequence = 0;
 	trace->timeout = 1;
+	trace->port = 33434;
 	trace->pid = getpid();
 }

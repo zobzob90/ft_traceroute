@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 15:45:56 by eric              #+#    #+#             */
-/*   Updated: 2026/03/06 12:28:47 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/06 14:07:20 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int parse_args(int ac, char *av[], t_traceroute *trace)
 			trace->timeout = ft_atoi(av[++i]);
 		else if (strcmp(av[i], "-n") == 0 && i + 1 < ac)	// -> flag bonus dns 
 			trace->no_dns = 1;
+		else if (strcmp(av[i], "-p") == 0 && i + 1 < ac)	// -> flag bonus choix port
+			trace->port = ft_atoi(av[++i]);
+		else if (strcmp(av[i], "-f") == 0 && i + 1 < ac)	// -> flag bonus choix du start TTL (default : 1)
+			trace->ttl = ft_atoi(av[++i]);
 		else if (av[i][0] != '-')							
 			return (i);
 		else

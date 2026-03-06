@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 15:46:10 by eric              #+#    #+#             */
-/*   Updated: 2026/03/06 12:36:01 by eric             ###   ########.fr       */
+/*   Updated: 2026/03/06 13:56:41 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	print_usage(char *str)
 {
 	fprintf(stderr, "Usage: %s [-m max_ttl] [-q nqueries] [-w timeout] host\n", str);
 	fprintf(stderr, "Options: \n");
-	fprintf(stderr, "  -m max_ttl		Max number of hops (default: 30)\n");
-	fprintf(stderr, "  -q nqueries		Number of probes per hop (default: 3)\n");
-	fprintf(stderr, "  -w timeout		Timeout in seconds (default: 3)\n");
-	fprintf(stderr, "  -n           	No DNS resolution\n");
-	fprintf(stderr, "  --help			Show this help\n");
+	fprintf(stderr, "	-m max_ttl		Max number of hops (default: 30)\n");
+	fprintf(stderr, "	-q nqueries		Number of probes per hop (default: 3)\n");
+	fprintf(stderr, "	-w timeout		Timeout in seconds (default: 3)\n");
+	fprintf(stderr, "	-n				No DNS resolution\n");
+	fprintf(stderr, "	--help			Show this help\n");
 }
